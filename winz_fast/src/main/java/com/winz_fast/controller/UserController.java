@@ -6,6 +6,10 @@ import com.winz_fast.payload.response.UserRegisterResponse;
 import com.winz_fast.payload.response.UserLoginResponse;
 import com.winz_fast.model.User;
 import com.winz_fast.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -22,6 +28,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "*")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -49,7 +56,7 @@ public class UserController {
     public ResponseEntity<UserRegisterResponse> register(@RequestBody UserRegisterRequest request) {
         UserRegisterResponse response = new UserRegisterResponse();
         List<User> userList = (List<User>) userService.findAll();
-        if (userList.stream().noneMatch(user -> user.getUsername().equals(request.getUsername()))) {
+        if (userList.stream().noneMatch(user -> request.getUsername().equals(user.getUsername()))) {
             User newUser = User.builder()
                     .username(request.getUsername())
                     .password(request.getPassword())
@@ -60,4 +67,21 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
+
+//    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+//    public String fetchSignOutSite(HttpServletRequest request, HttpServletResponse response){
+//
+//        HttpSession session = request.getSession(false);
+//
+//        session = request.getSession(false);
+//        if(session != null) {
+//            session.invalidate();
+//        }
+//
+//        for(Cookie cookie : request.getCookies()) {
+//            cookie.setMaxAge(0);
+//        }
+//
+//        return "redirect:/login?logout";
+//    }
 }

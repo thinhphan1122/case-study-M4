@@ -1,5 +1,4 @@
 function displayUsers() {
-
         $.ajax({
             type: "GET",
             url: "http://localhost:8080/api/users",
@@ -21,10 +20,8 @@ function displayUsers() {
                 userTable += '</table>';
 
                 $('#userList').html(userTable);
-
             }
         });
-
 }
 $(document).ready(displayUsers);
 
