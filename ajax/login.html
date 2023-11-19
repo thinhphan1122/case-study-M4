@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOGIN
+    </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+<form id="loginForm">
+    <h3>Đăng nhập</h3>
+    <div class="input">
+        <label for="loginUsername"></label><input type="text" id="loginUsername" name="Username" required = "required">
+        <span>Username</span>
+    </div>
+    <div class="input">
+        <label for="loginPassword"></label><input type="password" id="loginPassword" name="Password" required="required">
+        <span>Password</span>
+    </div>
+
+
+    <div class="input">
+        <button type="submit">Đăng nhập</button>
+<!--        <button onclick="window.location.href = 'http://127.0.0.1:5500/html/user/register.html'">Đăng ký</button>-->
+    </div>
+</form>
+<div id="errorContainer" style="display: none; color: red;"></div>
+
+<script src="login.js"></script>
+</body>
+</html>

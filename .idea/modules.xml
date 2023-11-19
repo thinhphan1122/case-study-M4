@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/case-study-M4.iml" filepath="$PROJECT_DIR$/.idea/case-study-M4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/winz_fast.main.iml" filepath="$PROJECT_DIR$/.idea/modules/winz_fast.main.iml" />
+    </modules>
+  </component>
+</project>
