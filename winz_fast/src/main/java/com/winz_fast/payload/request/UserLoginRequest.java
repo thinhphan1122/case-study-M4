@@ -1,9 +1,9 @@
-package com.winz_fast.dto.request;
+package com.winz_fast.payload.request;
 
 import lombok.Data;
 
 @Data
-public class UserLoginRequestDto {
+public class UserLoginRequest {
     private String username;
     private String password;
 }
