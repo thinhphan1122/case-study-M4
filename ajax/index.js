@@ -9,14 +9,14 @@ function displayUsers() {
                 userTable += '<tr>' +
                     '<th>ID</th>' +
                     '<th>Username</th>' +
-                    '<th>Phone number</th>' +
+                    '<th>Password</th>'
                     '</tr>';
 
                 for(let i = 0; i < data.length; i++) {
                     userTable += '<tr>';
                     userTable += '<td>' + data[i].id + '</td>';
                     userTable += '<td>' + data[i].username + '</td>';
-                    userTable += '<td>' + data[i].phoneNumber + '</td>';
+                    userTable += '<td>' + data[i].password + '</td>';
                 }
                 userTable += '</table>';
 

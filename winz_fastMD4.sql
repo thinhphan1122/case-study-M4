@@ -1,4 +1,4 @@
-# drop database winz_fast;
+drop database winz_fast;
 create database winz_fast;
 use winz_fast;
 
