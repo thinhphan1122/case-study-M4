@@ -7,12 +7,15 @@ import com.test.winzfast.exception.DuplicatedDataException;
 import com.test.winzfast.model.User;
 import com.test.winzfast.payload.request.LoginRequest;
 import com.test.winzfast.payload.request.RegisterRequest;
+import com.test.winzfast.payload.request.ResetPasswordRequest;
 import com.test.winzfast.payload.response.LoginResponse;
 import com.test.winzfast.payload.response.RegisterResponse;
+import com.test.winzfast.payload.response.ResetPasswordResponse;
 import com.test.winzfast.repository.UserRepository;
 import com.test.winzfast.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +29,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final LoginConverter loginConverter;
-    private final RegisterConverter registerConverter;
 
     @Override
     public Iterable<UserDto> findAll() {
@@ -75,7 +76,7 @@ public class UserServiceImpl implements UserService {
     public RegisterResponse register(RegisterRequest registerRequest) throws DuplicatedDataException {
         List<User> userList = userRepository.findAll();
 
-        if (userList.stream().anyMatch(user -> registerRequest.getUsername().equals(user.getUsername()))) {
+        if (userRepository.existsByUsername(registerRequest.getUsername())) {
             throw new DuplicatedDataException("Username is already exist!");
         } else if (registerRequest.getPassword() == null || registerRequest.getPassword().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be blank.");
@@ -90,5 +91,19 @@ public class UserServiceImpl implements UserService {
                 .build();
         userRepository.save(newUser);
         return RegisterConverter.registerEntityToDto(newUser);
+    }
+
+    @Override
+    public ResetPasswordResponse resetPassword(ResetPasswordRequest resetPasswordRequest) {
+        String username = resetPasswordRequest.getUsername();
+        String email = resetPasswordRequest.getEmail();
+        String newPassword = resetPasswordRequest.getNewPassword();
+        User user = userRepository.findByUsernameAndEmail(username, email);
+
+        if (user != null) {
+            user.setPassword(newPassword);
+            userRepository.save(user);
+            return new ResetPasswordResponse("Reset password successfully!", HttpStatus.OK);
+        } else throw new RuntimeException("Invalid username/email!");
     }
 }

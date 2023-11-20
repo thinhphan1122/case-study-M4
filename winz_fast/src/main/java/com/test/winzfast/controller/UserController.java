@@ -4,8 +4,10 @@ import com.test.winzfast.exception.DuplicatedDataException;
 import com.test.winzfast.exception.InvalidInputException;
 import com.test.winzfast.payload.request.LoginRequest;
 import com.test.winzfast.payload.request.RegisterRequest;
+import com.test.winzfast.payload.request.ResetPasswordRequest;
 import com.test.winzfast.payload.response.LoginResponse;
 import com.test.winzfast.payload.response.RegisterResponse;
+import com.test.winzfast.payload.response.ResetPasswordResponse;
 import com.test.winzfast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +30,7 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) throws InvalidInputException {
         LoginResponse user = userService.login(loginRequest);
         if (user != null) {
-            return new ResponseEntity<>("Login success!", HttpStatus.OK);
+            return new ResponseEntity<>("Login successfully!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Login failed! Invalid username or password.", HttpStatus.UNAUTHORIZED);
     }
@@ -37,9 +39,19 @@ public class UserController {
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
         try {
             RegisterResponse registerResponse = userService.register(registerRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).body(String.valueOf(registerResponse));
+            return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse.getUsername() + " Register successfully!");
         } catch (DuplicatedDataException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User is already exist!");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User/Email is already exist!");
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ResetPasswordResponse> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+        try {
+            ResetPasswordResponse resetPasswordResponse = userService.resetPassword(resetPasswordRequest);
+            return ResponseEntity.ok(resetPasswordResponse);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 }
