@@ -103,8 +103,8 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             user.setPassword(newPassword);
             userRepository.save(user);
-            return new ResetPasswordResponse("Reset password successfully!",HttpStatus.OK);
-        } else{
+            return new ResetPasswordResponse("Reset password successfully!", HttpStatus.OK);
+        } else {
             throw new RuntimeException("Invalid username/email!");
         }
     }

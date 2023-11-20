@@ -46,12 +46,12 @@ public class UserController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<ResetPasswordResponse> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
         try {
             ResetPasswordResponse resetPasswordResponse = userService.resetPassword(resetPasswordRequest);
-            return ResponseEntity.ok(resetPasswordResponse);
+            return ResponseEntity.ok(resetPasswordResponse.getMessage());
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input");
         }
     }
 }
