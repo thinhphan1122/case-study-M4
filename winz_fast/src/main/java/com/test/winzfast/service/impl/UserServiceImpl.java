@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
             User user = userRepository.findByUsername(loginRequest.getUsername());
             if (user != null) {
                 if (password.equals(user.getPassword())) {
-                    return LoginConverter.loginEntityToLoginDto(user);
+                    return LoginConverter.loginEntityToDto(user);
                 }
             }
         }
@@ -89,6 +89,6 @@ public class UserServiceImpl implements UserService {
                 .email(registerRequest.getEmail())
                 .build();
         userRepository.save(newUser);
-        return RegisterConverter.registerEntityToRegisterDto(newUser);
+        return RegisterConverter.registerEntityToDto(newUser);
     }
 }

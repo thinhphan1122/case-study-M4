@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WinzFastApplication {
+public class WinZFastApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WinzFastApplication.class, args);
+        SpringApplication.run(WinZFastApplication.class, args);
     }
 
 }
