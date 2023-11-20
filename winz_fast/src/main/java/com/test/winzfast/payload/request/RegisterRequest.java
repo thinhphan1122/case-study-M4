@@ -1,14 +1,10 @@
-package com.winz_fast.payload.response;
+package com.test.winzfast.payload.request;
 
 import lombok.Data;
 
 @Data
-public class UserRegisterResponse {
-
-    private Long id;
+public class RegisterRequest {
     private String username;
     private String password;
     private String email;
-   //
-
 }

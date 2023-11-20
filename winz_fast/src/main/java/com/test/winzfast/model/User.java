@@ -1,4 +1,4 @@
-package com.winz_fast.model;
+package com.test.winzfast.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,20 +26,22 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @NotBlank
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "full_name")
+    private String fullName;
+
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "full_name")
-    private String fullName;
-
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "password", nullable = false)
-    private String password;
 
     @Column(name = "phone_number")
     private String phoneNumber;

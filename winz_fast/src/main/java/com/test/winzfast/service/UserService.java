@@ -1,0 +1,22 @@
+package com.test.winzfast.service;
+
+import com.test.winzfast.dto.UserDto;
+import com.test.winzfast.exception.DuplicatedDataException;
+import com.test.winzfast.exception.InvalidInputException;
+import com.test.winzfast.payload.request.LoginRequest;
+import com.test.winzfast.payload.request.RegisterRequest;
+import com.test.winzfast.payload.response.LoginResponse;
+import com.test.winzfast.payload.response.RegisterResponse;
+
+import java.util.Optional;
+
+public interface UserService {
+    Iterable<UserDto> findAll();
+    Optional<UserDto> findById(Long id);
+    void save(UserDto userDto);
+    void delete(Long id);
+
+    //Add-ons
+    LoginResponse login (LoginRequest loginRequest) throws InvalidInputException;
+    RegisterResponse register (RegisterRequest registerRequest) throws DuplicatedDataException;
+}

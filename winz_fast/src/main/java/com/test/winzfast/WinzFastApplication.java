@@ -1,13 +1,13 @@
-package com.winz_fast;
+package com.test.winzfast;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WinZFastApplication {
+public class WinzFastApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WinZFastApplication.class, args);
+        SpringApplication.run(WinzFastApplication.class, args);
     }
 
 }

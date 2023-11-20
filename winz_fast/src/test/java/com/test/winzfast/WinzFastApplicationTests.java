@@ -1,4 +1,4 @@
-package com.winz_fast;
+package com.test.winzfast;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

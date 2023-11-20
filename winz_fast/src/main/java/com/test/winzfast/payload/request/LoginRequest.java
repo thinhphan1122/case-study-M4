@@ -1,9 +1,9 @@
-package com.winz_fast.payload.request;
+package com.test.winzfast.payload.request;
 
 import lombok.Data;
 
 @Data
-public class UserLoginRequest {
+public class LoginRequest {
     private String username;
     private String password;
 }
