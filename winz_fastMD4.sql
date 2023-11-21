@@ -40,11 +40,25 @@ create table category
     name varchar(50)
 );
 
+create table specifications
+(
+    id             bigint primary key auto_increment,
+    brand        varchar(50),
+    car_model    varchar(50),
+    engine         varchar(50),
+    year           varchar(10),
+    fuel           varchar(10),
+    origin         varchar(50),
+    gear           varchar(50),
+    number_of_seat int,
+    is_deleted boolean
+
+);
+
 create table product
 (
     id           bigint primary key auto_increment,
-    brand        varchar(50),
-    car_model    varchar(50),
+
     title        varchar(50),
     thumbnail    varchar(255),
     product_date varchar(50),
@@ -52,21 +66,11 @@ create table product
     view         int,
     user_id      bigint,
     category_id  bigint,
+    is_deleted boolean,
+    specifications_id bigint,
+    foreign key (specifications_id) references specifications (id),
     foreign key (category_id) references category (id),
     foreign key (user_id) references users (id)
-);
-
-create table specifications
-(
-    id             bigint primary key auto_increment,
-    engine         varchar(50),
-    year           varchar(10),
-    fuel           varchar(10),
-    origin         varchar(50),
-    gear           varchar(50),
-    number_of_seat int,
-    product_id     bigint,
-    foreign key (product_id) references product (id)
 );
 
 create table booking

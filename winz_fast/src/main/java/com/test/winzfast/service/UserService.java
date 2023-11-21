@@ -1,8 +1,9 @@
 package com.test.winzfast.service;
 
-import com.test.winzfast.dto.UserDto;
+import com.test.winzfast.dto.UserDTO;
 import com.test.winzfast.exception.DuplicatedDataException;
 import com.test.winzfast.exception.InvalidInputException;
+import com.test.winzfast.model.User;
 import com.test.winzfast.payload.request.LoginRequest;
 import com.test.winzfast.payload.request.RegisterRequest;
 import com.test.winzfast.payload.request.ResetPasswordRequest;
@@ -13,11 +14,13 @@ import com.test.winzfast.payload.response.ResetPasswordResponse;
 import java.util.Optional;
 
 public interface UserService {
-    Iterable<UserDto> findAll();
 
-    Optional<UserDto> findById(Long id);
+    //CRUD
+    Iterable<UserDTO> findAll();
 
-    void save(UserDto userDto);
+    Optional<UserDTO> findById(Long id);
+
+    void save(UserDTO userDto);
 
     void delete(Long id);
 
@@ -27,4 +30,6 @@ public interface UserService {
     RegisterResponse register(RegisterRequest registerRequest) throws DuplicatedDataException;
 
     ResetPasswordResponse resetPassword(ResetPasswordRequest resetPasswordRequest);
+
+    UserDTO getUserById(Long id);
 }

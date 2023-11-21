@@ -2,7 +2,7 @@ package com.test.winzfast.service.impl;
 
 import com.test.winzfast.converter.LoginConverter;
 import com.test.winzfast.converter.RegisterConverter;
-import com.test.winzfast.dto.UserDto;
+import com.test.winzfast.dto.UserDTO;
 import com.test.winzfast.exception.DuplicatedDataException;
 import com.test.winzfast.model.User;
 import com.test.winzfast.payload.request.LoginRequest;
@@ -31,25 +31,23 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
 
     @Override
-    public Iterable<UserDto> findAll() {
+    public Iterable<UserDTO> findAll() {
         Iterable<User> users = userRepository.findAll();
         return StreamSupport.stream(users.spliterator(), true)
-                .map(user -> modelMapper.map(user, UserDto.class))
+                .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<UserDto> findById(Long id) {
+    public Optional<UserDTO> findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return Optional.ofNullable(modelMapper.map(user, UserDto.class));
+        return Optional.ofNullable(modelMapper.map(user, UserDTO.class));
     }
 
+
     @Override
-    public void save(UserDto userDto) {
+    public void save(UserDTO userDto) {
         User user = modelMapper.map(userDto, User.class);
-        if (!userDto.getPassword().isEmpty()) {
-            user.setPassword(userDto.getPassword());
-        }
         userRepository.save(user);
     }
 
@@ -108,4 +106,11 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Invalid username/email!");
         }
     }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        return modelMapper.map(user, UserDTO.class);
+    }
+
 }
