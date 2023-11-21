@@ -37,14 +37,14 @@ public class AdminController {
         return new ResponseEntity<UserDTO>(userService.getUserById(id), HttpStatus.OK);
     }
 
-    //Cần nghiên cứu thêm
     @PostMapping("/user-list/user/{id}/save")
     public ResponseEntity<String> saveOrUpdateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+        userDTO.setId(id);
         userService.save(userDTO);
         return ResponseEntity.ok("Save/Update completed!");
     }
 
-    @DeleteMapping("/user-list/user/delete/{id}")
+    @DeleteMapping("/user-list/user/{id}/delete")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         UserDTO userDTO = userService.getUserById(id);
         String username = userDTO.getUsername();
