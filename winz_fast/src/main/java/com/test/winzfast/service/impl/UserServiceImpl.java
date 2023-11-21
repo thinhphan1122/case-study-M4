@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
         return Optional.ofNullable(modelMapper.map(user, UserDTO.class));
     }
 
-
     @Override
     public void save(UserDTO userDto) {
         User user = modelMapper.map(userDto, User.class);
